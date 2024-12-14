@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  flaskapp:
+    build: .
+    ports:
+      - "80:80"
+    environment:
+      - MONGO_URI=mongodb://mongo-gamesdb:27017/gamesdb
+      - FLASK_APP=run.py
+    depends_on:
+      - mongo-gamesdb
+    container_name: flaskapp
+
+  mongo-gamesdb:
+    image: mongo:3.6.22-xenial
+    container_name: mongo-gamesdb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:

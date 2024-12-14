@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Formulario para agregar un juego</h1>
+<form id="form-game" class="form-container">
+    <label for="name">Nombre:</label>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="min_players">Jugadores Mínimos:</label>
+    <input type="number" id="min_players" name="min_players" required><br><br>
+
+    <label for="max_players">Jugadores Máximos:</label>
+    <input type="number" id="max_players" name="max_players" required><br><br>
+
+    <label for="age_limit">Límite de Edad:</label>
+    <input type="number" id="age_limit" name="age_limit" required><br><br>
+
+    <label for="country">País de Creación:</label>
+    <input type="text" id="country" name="country" required><br><br>
+
+    <label for="cost">Costo:</label>
+    <input type="number" id="cost" name="cost" step="0.01" required><br><br>
+
+    <button type="submit">Enviar</button>
+</form>
+
+
+{% endblock content%}

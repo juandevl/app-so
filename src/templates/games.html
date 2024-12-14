@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Lista de Juegos</h1>
+<table border=1 id="table-games">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Limite edad</th>
+            <th>Jugadores min</th>
+            <th>Jugadores max</th>
+            <th>Pais</th>
+            <th>Costo</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for game in games: %}
+            <tr>
+                <td>{{game.name}}</td>
+                <td>{{game.age_limit}}</td>
+                <td>{{game.min_players}}</td>
+                <td>{{game.max_players}}</td>
+                <td>{{game.country}}</td>
+                <td>{{game.cost}} USD</td>
+            </tr>
+        {% endfor %}        
+    </tbody>
+</table>
+
+
+{% endblock content %}

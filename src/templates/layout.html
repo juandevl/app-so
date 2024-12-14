@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>Games app</title>
+</head>
+<body>
+    <header>
+        <h1 class="logo">CRUD application games</h1>
+        <navbar>
+            <ul>
+                <li><a href="{{ url_for('form_game') }}">Insert game</a></li>
+                <li><a href="{{ url_for('get_games') }}">Show games</a></li>
+                <li><a href="">Show game</a></li>
+                <li><a href="">Update game</a></li>
+                <li><a href="">Delete game</a></li>
+            </ul>
+        </navbar>
+    </header>
+
+    <main>
+        <div class="container">
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </main>
+
+    <div>
+        <input type="text" id="filtro" placeholder="Ingrese el nombre del juego">
+        <button id="btn-show-table" type="button">Mostrar tabla</button>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
