@@ -1,30 +1,51 @@
 {% extends "layout.html" %}
 {% block content %}
-<h1>Lista de Juegos</h1>
-<table border=1 id="table-games">
-    <thead>
-        <tr>
-            <th>Nombre</th>
-            <th>Limite edad</th>
-            <th>Jugadores min</th>
-            <th>Jugadores max</th>
-            <th>Pais</th>
-            <th>Costo</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for game in games: %}
-            <tr>
-                <td>{{game.name}}</td>
-                <td>{{game.age_limit}}</td>
-                <td>{{game.min_players}}</td>
-                <td>{{game.max_players}}</td>
-                <td>{{game.country}}</td>
-                <td>{{game.cost}} USD</td>
-            </tr>
-        {% endfor %}        
-    </tbody>
-</table>
+<div class="d-flex flex-column justify-content-center">
+    <div class="d-flex flex-row align-items-center justify-content-between">
+        <h3 class="p-4 mx-4">Lista de Juegos</h3>
+        <div class="d-flex align-items-center mx-4" role="search">
+            <input id="inputSearch" class="form-control m-2" type="search" placeholder="Buscar" aria-label="Search">
+        </div>
+    </div>
 
+    <table id="table-games" class="table table-hover table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Edad mínima</th>
+            <th scope="col">Jugadores mín.</th>
+            <th scope="col">Jugadores max.</th>
+            <th scope="col">País</th>
+            <th scope="col">Costo</th>
+            <th scope="col">Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for game in games: %}
+                <tr>
+                    <td data-name=" {{ game.name }}">{{game.name}}</td>
+                    <td data-age-limit=" {{ game.age_limit }}" >{{game.age_limit}}</td>
+                    <td data-min-players="{{ game.min_players }}" >{{game.min_players}}</td>
+                    <td data-max-players="{{ game.max_players }}" >{{game.max_players}}</td>
+                    <td data-country="{{ game.country }}" >{{game.country}}</td>
+                    <td data-cost="{{ game.cost }}" >{{game.cost}} USD</td>
+                    <td>
+                        <button class="btn btn-danger btnDelete mx-2" data-id="{{game._id}}">Eliminar</button>
+                        <a href="{{ url_for('get_game', id=game._id) }}" class="btn btn-warning btnUpdate mx-2">Modificar</a>
+                        {#<button type="button" class="btn btn-warning mx-2 btnUpdate" data-id="{{game._id}}"
+                        data-name="{{game.name}}" 
+                        data-age-limit="{{game.age_limit}}" 
+                        data-min-players="{{game.min_players}}" 
+                        data-max-players="{{game.max_players}}"
+                        data-country="{{game.country}}"
+                        data-cost="{{game.cost}}">
+                            Modificar
+                        </button> #}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 
 {% endblock content %}

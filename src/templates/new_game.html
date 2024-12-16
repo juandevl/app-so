@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block content %}
+<div id="new-game-form">
+    <h3>Agregar nuevo juego</h3>
+    <form id="form-new-game" class="row g-3">
+        <div class="col-md-12">
+            <label for="name" class="form-label">Nombre de juego:</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="col-md-6">
+            <label for="min_players" class="form-label">Cantidad mínima de jugadores:</label>
+            <input type="number" min="1" step="1" class="form-control" id="min_players" name="min_players" required>
+        </div>
+        <div class="col-md-6">
+            <label for="max_players" class="form-label">Cantidad máxima de jugadores:</label>
+            <input type="number" min="1" step="1" class="form-control" id="max_players" name="max_players" required>
+        </div>
+        <div class="col-12">
+            <label for="age_limit" class="form-label">Edad mínima:</label>
+            <input type="number" min="1" step="1" class="form-control" id="age_limit" name="age_limit" required>
+        </div>
+        <div class="col-md-6">
+            <label for="country" class="form-label">País de origen:</label>
+            <input type="text" class="form-control" id="country" name="country" required>
+        </div>
+        <div class="col-md-6">
+            <label for="cost" class="form-label">Precio:</label>
+            <input type="number" min="0.01" step="0.01" class="form-control" id="cost" name="cost" required>
+        </div>
+        <div class="col-12">
+            <button type="button" id="btnNewGame" onclick="insertNewGame()" class="btn btn-secondary">Agregar juego</button>
+        </div>
+    </form>
+</div>
+
+{% endblock content%}
