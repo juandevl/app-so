@@ -1,48 +1,5 @@
 A continuación, el gráfico muestra como la aplicación gestiona las solicitudes HTTP enviadas por el usuario.
-
-[ Usuario ]
-
-     │ Solicitud HTTP
-     ▼
-[ Apache HTTP Server ] 
-
-     │ WSGI (redirecciona)
-     ▼
-[ App Flask (Python) ] 
-
-     │ CRUD (pymongo)
-     ▼
-[ BDD (MongoDB) ]
-
-     │ json response
-     ▼
-[ App Flask (Python) ]
-
-     │
-     ▼
-[ Apache HTTP Server ]
-
-     │
-     ▼
-[ Usuario ]
-
-
-+------------------------------+
-|        Docker Compose        |
-|   +-----------------------+  |
-|   | Contenedor BDD MongoDB|  |
-|   |       	            |  |
-|   +-----------------------+  |
-|              ▲               |
-|              │ PYMONGO       |
-|              ▼               |
-|   +-----------------------+  |
-|   | Contenedor Flask      |  |
-|   | Apache Python         |  |
-|   |                       |  |
-|   +-----------------------+  |
-+------------------------------+
-
+```bash
 [ Usuario ]                               +------------------------------+
      │ Solicitud HTTP                     |        Docker Compose        |
      ▼                                    |   +-----------------------+  |
@@ -62,7 +19,7 @@ A continuación, el gráfico muestra como la aplicación gestiona las solicitude
      │
      ▼
 [ Usuario ]
-
+```
 
 
 # Aplicación Web CRUD - Gestión de Juegos de Mesa
@@ -113,9 +70,30 @@ El proyecto está organizado de la siguiente manera:
 Para ejecutar esta aplicación en tu máquina, necesitas tener instalados los siguientes requisitos:
 
 - **Docker** (y Docker Compose): Asegúrate de tener Docker y Docker Compose instalados. Si no los tienes, puedes descargarlos desde docker.com.
-- **Git** (opcional, para clonar el repositorio)
 
 ### Pasos para la instalacion
 
 1. Ubicarse en el directorio raíz del proyecto (donde se encuentran los archivos Dockerfile y docker-compose.yml)
-2. Abrir una terminal y ejecutar los siguientes comandos:
+2. Abrir una terminal y ejecutar el siguiente comando:
+```bash
+docker-compose up -d --build
+```
+    Dicho comando realiza el proceso de construcción de los contenedores.
+    Al finalizar la construcción, quedan en ejecución en segundo plano, liberando el uso de la terminal.
+3. Una vez finalizada la construcción de los contenedores y la ejecución de los mismos, debemos dirigirnos hacia nuestro navegador e ingresar la siguiente URL:
+**http://localhost:80/**
+En dicha URL, se encuentra la aplicación Flask en ejecución, con la base de datos de la aplicacion en MongoDB.
+4. Si queremos ver los contenedores funcionando podemos ejecutar el siguiente comando:
+```bash
+docker ps
+```
+Dicho comando nos muestra los contenedores en ejecución.
+5. Para detener los contenedores, podemos ejecutar los siguientes comandos:
+```bash
+# Para detener la ejecución y remover los contenedores
+docker-compose down
+
+# Para detener la ejecución de los contenedores
+docker stop <ID contenedor o NAME>
+```
+Si se desea ejecutar nuevamente los contenedores, volver al punto 1.
