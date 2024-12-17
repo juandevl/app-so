@@ -23,9 +23,8 @@ const showPopup = (message, type) => {
 /* Escucho cuando todo el dom fue cargado */
 document.addEventListener("DOMContentLoaded", () => {
     
-    /* Funcion para enviar los datos del formulario para insertar nuevo juego */
     const formNewGame = document.querySelector("#form-new-game")
-    const formUpdateGame = document.querySelector("#form-update-game")
+    
     const txtfiltro = document.querySelector("#filtro")
     const btn = document.querySelector("#btn-show-table")
 
@@ -43,12 +42,12 @@ document.addEventListener("DOMContentLoaded", () => {
     //Logica para detectar los cambios del input en tiempo real
     //y ocultar filas de la tabla que contengan el valor del input
     inputSearch.addEventListener("input", (e) => {
-        let input = inputSearch.value.toLowerCase()
+        const input = inputSearch.value.toLowerCase()
         const tbl = document.querySelector("#table-games")
         const rows = document.querySelectorAll("tbody tr")
         rows.forEach(row => {
-            let name = row.querySelector("td[data-name]").getAttribute("data-name")
-            row.style.display = name.toLowerCase().includes(input) ? "" : "none"    
+            let name = row.querySelector("td[data-name]").getAttribute("data-name").toLowerCase()
+            row.style.display = name.includes(input) ? "" : "none"    
         })
         
     })
@@ -80,14 +79,16 @@ document.addEventListener("DOMContentLoaded", () => {
     
         })
     })
-    
-    //Confirmar actualizacion de juego
-    btnConfirmUpdate.addEventListener("click", (e) => {
-        console.log(e);
-        e.preventDefault()
 
-        const formData = new FormData(formUpdateGame)
-        const id = document.querySelector("#id").value
+})
+
+ //Confirmar actualizacion de juego
+ function updateGame(){
+    const formUpdateGame = document.querySelector("#form-update-game")
+    const formData = new FormData(formUpdateGame)
+    const id = document.querySelector("#id").value
+    
+    if(validateForm(formData)){
         
         fetch(`/games/update/${id}`, {
             method: 'POST',
@@ -105,26 +106,20 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(err => {
             showPopup("Hubo un error al actualizar el juego", "error")
         })
+    }else{
+        alert("Datos ingresados inválidos")
+    }
 
-    })
+}
 
-})
 
 //Funcion para insertar juego nuevo
 function insertNewGame() {
     const formNewGame = document.querySelector("#form-new-game")
-    const regex = /^[A-Za-z0-9\s\-_\.]{3,100}$/ //Expresion regular para permitir letras, numeros y simbolos ".-_"
     const formData = new FormData(formNewGame)
-    //campos del formulario
-    const name = formData.get("name") 
-    const minPlayers = formData.get("min_players") > 0 ? true : false
-    const maxPlayers = formData.get("max_players") > 0 ? true : false
-    const ageLimit = formData.get("age_limit") > 0 ? true : false
-    const cost = formData.get("cost") > 0 ? true : false
-
+    
     //válido que los datos ingresados sean correctos
-    if (regex.test(name) && minPlayers && maxPlayers && ageLimit && cost){
-        
+    if (validateForm(formData)){
         fetch('/games/create', {
             method: "POST",
             body: formData
@@ -144,4 +139,21 @@ function insertNewGame() {
     }else{
         alert("Datos ingresados inválidos")
     }
+}
+
+//Funcion para validar campos de formulario
+function validateForm(form){
+    const regex = /^[A-Za-z0-9\s\-_\.]{3,100}$/ //Expresion regular para permitir letras, numeros y simbolos ".-_"
+    //campos del formulario
+    const name = form.get("name") 
+    const country = form.get("country")
+    const minPlayers = form.get("min_players") > 0 
+    const maxPlayers = form.get("max_players") > 0 
+    const ageLimit = form.get("age_limit") > 0 
+    const cost = form.get("cost") > 0
+    console.log(minPlayers, maxPlayers, ageLimit, cost)
+
+
+    return regex.test(name) && minPlayers && maxPlayers && ageLimit && cost && regex.test(country)
+
 }

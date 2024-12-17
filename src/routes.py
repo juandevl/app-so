@@ -5,7 +5,7 @@ from src import app, mongo
 
 @app.route('/', methods=['GET'])
 def home():
-  return render_template('home.html')
+    return render_template('home.html')
 
 @app.route('/new_game', methods=['GET'])
 def new_game():
@@ -123,10 +123,3 @@ def update_game(id):
             return jsonify({"success": False, "message": "No se encontro juego para actualizar"}), 404
     else:
         return jsonify({"message": "Falta informacion, datos inválidos"}),400
-    
-
-
-
-# if __name__ == '__main__':
-#   app.run(debug=True)
-#   app.run(host='0.0.0.0')

@@ -16,6 +16,10 @@ body {
     background-color: var(--body-color);
   }
 
+main{
+  min-height: 70vh;
+}
+
 header {
   background-color: var(--container-color);
   color: var(--title-color);
@@ -54,7 +58,7 @@ h3 {
 footer {
   background-color: var(--footer-color);
   color: var(--border-color); 
-  height: 18vh;
+  height: 16vh;
 }
 
 footer a:hover {
