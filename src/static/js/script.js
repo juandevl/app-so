@@ -128,7 +128,9 @@ function insertNewGame() {
         .then(data => {
             if (data.success){
                 showPopup(data.message, "success")
-                formNewGame.reset()
+                setTimeout(() => {
+                    window.location.href = "/games"
+                }, 2000)
             }else{
                 showPopup(data.message, "error")
             }
