@@ -56,7 +56,6 @@ def insert_game():
     else:
         return jsonify({"success": False, "message": "Datos inválidos"}), 400
     
-    return render_template("form_game.html")
     
 
 #READ
@@ -122,4 +121,4 @@ def update_game(id):
         else:
             return jsonify({"success": False, "message": "No se encontro juego para actualizar"}), 404
     else:
-        return jsonify({"message": "Falta informacion, datos inválidos"}),400
+        return jsonify({"success": False, "message": "Falta informacion, datos inválidos"}),400
