@@ -95,7 +95,7 @@ def delete_game(id):
 #Metodo PUT actualizamos objeto completo
 #Metodo PATCH actualizamos un campo del objeto
 
-#UPDATE -> Uso metodo POST porque tuve complicaciones al no reconocer el metodo PUT
+#UPDATE -> Uso metodo POST porque tuvimos complicaciones con el front al no reconocer el metodo PUT
 @app.route('/games/update/<id>', methods=['POST'])
 def update_game(id):
     name = request.form['name']
